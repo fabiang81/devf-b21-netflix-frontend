@@ -1,11 +1,11 @@
 import React, {Component} from 'react';
 import './style.css';
-import signup from '../../services/Signup'
+import signup from '../../services/signup'
 
 class Signup extends Component{
 
-    constructor(){
-        super();
+    constructor(props){
+        super(props);
         this.state = {
             name:"",
             lastname:"",
@@ -37,8 +37,9 @@ class Signup extends Component{
         if(this.validatePasswords(this.state.password, this.state.check_password)){
             //Hacer petición post al backend
             signup(this.state).then(() => {
-                alert("Nuevo usuario creado exitosamente");
+                this.props.history.push('/login');
             }).catch((err) => {
+                console.log(err);
                 alert("Error al crear el nuevo usuario");
             });
         }
